@@ -75,8 +75,9 @@ class features_cloner {
         
     //Did we get a machine-readable module name? 
     //Run a query, it's safer than drupal_get_path since it only checks enabled modules.
-    $sql = "select filename from {system} where name='%s' and status=1";
-    $modulefile = db_result(db_query_range($sql, $this->src_feature, 0, 1)); 
+    $sql = "select filename from {system} where name=:name and status=:status";
+    $modulefile = db_query($sql, array('name' => $this->src_feature, 'status' => 1))->fetchField();
+
     $this->src_path = dirname($modulefile);
     
     if (empty($this->src_path)) {
