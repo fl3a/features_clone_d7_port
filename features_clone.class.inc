@@ -76,7 +76,8 @@ class features_cloner {
     $modulefile = db_query($sql, array('name' => $this->src_feature, 'status' => 1))->fetchField();
 
     $this->src_path = dirname($modulefile);
-    $this->dst_path = dirname($modulefile) . '/' . $this->dst_feature;
+    $dirname = dirname($modulefile);
+    $this->dst_path = realpath($dirname . '/..') . '/' . $this->dst_feature;
     
     if (empty($this->src_path)) {
       drush_set_error('FEATURES_CLONE_INVALID_FEATURENAME_SRC', 
