@@ -18,7 +18,6 @@ function features_clone_drush_command() {
       'src_featurename' => dt('Required. Modulename (machine name) of the Feature to Clone.'),
       'dst_featurename' => dt('Required. Machine name of the new Feature created after cloning.'),      
     ),    
-    //'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
   );
 
   return $items;
