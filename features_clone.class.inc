@@ -69,9 +69,6 @@ class features_cloner {
                       dt('Invalid name for the destination feature. The machine-readable name must contain only lowercase letters, numbers or underscores.'));
       return FALSE;
     }
-  
-      
-    $this->dst_path = "sites/default/modules/custom_features/" . $this->dst_feature;
         
     //Did we get a machine-readable module name? 
     //Run a query, it's safer than drupal_get_path since it only checks enabled modules.
@@ -79,6 +76,7 @@ class features_cloner {
     $modulefile = db_query($sql, array('name' => $this->src_feature, 'status' => 1))->fetchField();
 
     $this->src_path = dirname($modulefile);
+    $this->dst_path = dirname($modulefile) . '/' . $this->dst_feature;
     
     if (empty($this->src_path)) {
       drush_set_error('FEATURES_CLONE_INVALID_FEATURENAME_SRC', 
